@@ -32,11 +32,16 @@
                         </li>
                     {% endfor %}
                 </ul>
-                {% show_pages %}
+                <div class="row placeholders ">
+                    {% show_pages %}
+                </div>
             {% else %}
-                <strong>There are no categories present.</strong>
+                <strong>There are no tracks present.</strong>
             {% endif %}
-            </div>
+    </div>
+    <div class="row placeholders ">
+        <a href="{% url 'add_track' %}" class="btn btn-primary">Add Track</a>
+    </div>
 {% endblock %}
 
 

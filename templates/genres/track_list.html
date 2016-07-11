@@ -8,13 +8,12 @@
 {% load el_pagination_tags %}
     <div class="jumbotron vertical-center">
         <div class="row placeholders ">
-            <div class="placeholder">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h2 class="panel-title">Track List ( {{genre_name}})</h2>
-                    </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Tracks ( {{genre_name}})</h2>
                 </div>
-
+            </div>
+        </div>
         {%if genre%}
             {%if track_list%}
                 {% paginate track_list %}
@@ -23,15 +22,17 @@
                     <li class="list-group-item"><a href="{% url 'genre_track_detail' genre.slug track.id %}">{{ track.title }}</a></li>
                 {% endfor %}
                 </ul>
-                {% show_pages %}
-
+                <div class="row placeholders ">
+                    {% show_pages %}
+                </div>
             {% else %}
-                <strong>There are no genre present.</strong>
+                <strong>There are no tracks present.</strong>
 
             {% endif %}
         {% endif %}
-            </div>
-        </div>
+
     </div>
-<a href="{% url 'edit_genre' genre.slug %} " class="btn btn-primary">Edit Genre</a>
+    <div class="row placeholders ">
+        <a href="{% url 'edit_genre' genre.slug %} " class="btn btn-primary">Edit Genre</a>
+    </div>
 {% endblock %}
