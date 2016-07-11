@@ -1,0 +1,1 @@
+web: gunicorn greedymusic2.wsgi

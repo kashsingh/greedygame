@@ -7,7 +7,4 @@ urlpatterns = [url(r'^$', views.listview_genre, name='tracks'),
                url(r'^(?P<genre_name_slug>[\w\-]+)/$', views.tracklist, name='tracklist'),
                url(r'^(?P<genre_name_slug>[\w\-]+)/edit_genre$', views.edit_genre, name='edit_genre'),
                url(r'^(?P<genre_name_slug>[\w\-]+)/(?P<track_id>[\w\-]+)/$', views.genre_track_detail, name='genre_track_detail'),
-               #url(r'^about/', views.about, name='about'),
-               #url(r'^genre/(?P<category_name_slug>[\w\-]+)/add_page/$', views.add_page, name='add_page'),
-
-              ]
+               ]
