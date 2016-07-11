@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %} - Tracks{% endblock %}
+
+{% block body_block %}
+{% load el_pagination_tags %}
+    <div class="jumbotron vertical-center">
+        <div class="row placeholders">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Track List</h2>
+                </div>
+            </div>
+            <form method="GET" action="">
+                    <input type="text" name="search" placeholder="Search track or genre" value="{{ request.GET.search }}">
+                    <input type="submit" value="Search">
+                </form>
+            </br>
+        </div>
+                {% if all_tracks %}
+                {% paginate all_tracks %}
+                <ul class="list-group">
+                    {% for track in all_tracks  %}
+                        <li class="list-group-item" ><a href="{% url 'track_detail'  track.id %}">{{ track.title }}
+                            <small>[ |
+                                {% for genre in track.genres.all %}
+                                    {{ genre.name }} |
+                                {% endfor %} ]
+                             </small></a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% show_pages %}
+            {% else %}
+                <strong>There are no categories present.</strong>
+            {% endif %}
+            </div>
+{% endblock %}
+
+
+
+
+
+

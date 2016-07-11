@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% load track_extras %}
+
+{% block title %} - {{track.title}}{% endblock %}
+
+{% block body_block %}
+    <div class="jumbotron vertical-center">
+        <h2 align="center">Track Detail</h2>
+
+        {% if track %}
+            <ul class="list-group">
+                <li class="list-group-item"> Track Title: {{ track.title}} </li>
+                <li class="list-group-item">Genre: |{% for genre in track.genres.all %} {{genre.name}} | {% endfor %}</li>
+                <li class="list-group-item">Rating:
+                  {% num_range 5 as some_range %}
+                  {% for i in some_range %}
+                        <span class="glyphicon glyphicon-star"></span>
+                  {% endfor %}
+
+                </li>
+            </ul>
+
+        {% else %}
+            <strong>There are no genre present.</strong>
+        {% endif %}
+     </div>
+    <p><a href="{% url 'track_edit' track.id %}" class="btn btn-primary">Edit Track</a></p>
+
+{% endblock %}
