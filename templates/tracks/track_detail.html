@@ -14,10 +14,10 @@
                 <li class="list-group-item"> Track Title: {{ track.title}} </li>
                 <li class="list-group-item">Genre: |{% for genre in track.genres.all %} {{genre.name}} | {% endfor %}</li>
                 <li class="list-group-item">Rating:
-                 {% for i in star%}
+                 {% for i in track.rating|get_range_full %}
                         <span class="glyphicon glyphicon-star"></span>
                  {% endfor %}
-                 {% for i in empty_star%}
+                 {% for i in track.rating|get_range_empty %}
                         <span class="glyphicon glyphicon-star-empty"></span>
                  {% endfor %}
                  <small>

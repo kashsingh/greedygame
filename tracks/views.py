@@ -45,7 +45,6 @@ def edit_track(request, track_id = None):
     track_instance = get_object_or_404(Track, id=track_id)
 
     form = TrackForm(request.POST or None, instance=track_instance)
-    #url = '/tracks'
     # Have we been provided with a valid form?
     if form.is_valid():
         form.save(commit=True)
@@ -54,5 +53,3 @@ def edit_track(request, track_id = None):
     # Bad form (or form details), no form supplied...
     # Render the form with error messages (if any).
     return render(request, 'tracks/add_track.html', context_dict)
-
-

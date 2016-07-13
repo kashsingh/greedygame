@@ -1,40 +1,45 @@
-from django.template import Library, Node, TemplateSyntaxError
+from django.template import Library
 
 register = Library()
 
-class RangeNode(Node):
-    def __init__(self, num, context_name):
-        self.num, self.context_name = num, context_name
-    def render(self, context):
-        context[self.context_name] = range(int(self.num))
-        return ""
+@register.filter
+def get_range_full( value ):
+  """
+    Filter - returns a list containing range made from given value
+    Usage (in template):
 
-@register.tag
-def num_range(parser, token):
-    """
-    Takes a number and iterates and returns a range (list) that can be
-    iterated through in templates
+    <ul>{% for i in 3|get_range %}
+      <li>{{ i }}. Do something</li>
+    {% endfor %}</ul>
 
-    Syntax:
-    {% num_range 5 as some_range %}
+    Results with the HTML:
+    <ul>
+      <li>0. Do something</li>
+      <li>1. Do something</li>
+      <li>2. Do something</li>
+    </ul>
 
-    {% for i in some_range %}
-      {{ i }}: Something I want to repeat\n
-    {% endfor %}
+    Instead of 3 one may use the variable set in the views
+  """
+  return range( value )
 
-    Produces:
-    0: Something I want to repeat
-    1: Something I want to repeat
-    2: Something I want to repeat
-    3: Something I want to repeat
-    4: Something I want to repeat
-    """
-    try:
-        fnctn, num, trash, context_name = token.split_contents()
-    except ValueError:
-        raise TemplateSyntaxError, "%s takes the syntax %s number_to_iterate\
-            as context_variable" % (fnctn, fnctn)
-    if not trash == 'as':
-        raise TemplateSyntaxError, "%s takes the syntax %s number_to_iterate\
-            as context_variable" % (fnctn, fnctn)
-    return RangeNode(num, context_name)
+@register.filter
+def get_range_empty( value ):
+  """
+    Filter - returns a list containing range made from given value
+    Usage (in template):
+
+    <ul>{% for i in 3|get_range %}
+      <li>{{ i }}. Do something</li>
+    {% endfor %}</ul>
+
+    Results with the HTML:
+    <ul>
+      <li>0. Do something</li>
+      <li>1. Do something</li>
+      <li>2. Do something</li>
+    </ul>
+
+    Instead of 3 one may use the variable set in the views
+  """
+  return range( 10-value )
