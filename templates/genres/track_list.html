@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load staticfiles %}
+{% load genre_extras %}
 
 {% block title %} - {{genre_name}}(Tracks){% endblock %}
 
@@ -19,7 +20,16 @@
                 {% paginate track_list %}
                 <ul class="list-group">
                 {% for track in track_list  %}
-                    <li class="list-group-item"><a href="{% url 'genre_track_detail' genre.slug track.id %}">{{ track.title }}</a></li>
+                    <li class="list-group-item"><a href="{% url 'genre_track_detail' genre.slug track.id %}">{{ track.title }}</a>
+                        <div class="pull-right">
+                                {% for i in track.rating|get_range_full %}
+                                   <span class="glyphicon glyphicon-star"></span>
+                                {% endfor %}
+                                {% for i in track.rating|get_range_empty %}
+                                   <span class="glyphicon glyphicon-star-empty"></span>
+                                {% endfor %}
+                        </div>
+                    </li>
                 {% endfor %}
                 </ul>
                 <div class="row placeholders ">
