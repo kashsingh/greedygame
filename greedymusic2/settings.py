@@ -14,7 +14,8 @@ import os
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 
 TEMPLATE_CONTEXT_PROCESSORS += (
     'django.core.context_processors.request',
@@ -31,7 +32,7 @@ TEMPLATE_PATH = 'templates'
 SECRET_KEY = '(i5fmt7!bj=^e_()(9_6g8rsj$-zk813eh%nmme7cz7n24f9zg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
